@@ -222,7 +222,11 @@ FUNCTION {format.names}
               if$
               t "others" =
                 { " et~al." * }
-                { " and " * t * }
+                { t #1 text.prefix$ "I" =
+                    {" e " * t * }
+                    {" y " * t * }
+                    if$
+                }
               if$
             }
           if$
@@ -848,7 +852,12 @@ FUNCTION {format.lab.names}
         'skip$
         { s #2 "{ff }{vv }{ll}{ jj}" format.name$ "others" =
             { " et~al." * }
-            { " and " * s #2 "{vv~}{ll}" format.name$ * }
+            { s #2 "{vv~}{ll}" format.name$ 't :=
+              t #1 text.prefix$ "I" =
+                {" e " * t * }
+                {" y " * t * }
+              if$
+            }
           if$
         }
       if$
